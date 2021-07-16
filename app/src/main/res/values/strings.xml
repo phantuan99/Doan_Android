@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Đồ án ẨM THỰC MIỀN TÂY</string>
+    <string name="slogan">Xin chào mừng đến với Đồ Án Ẩm Thực Miền Tây</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="text_menu_dialog">Đang load chờ xíu</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_menu">Menu</string>
+    <string name="menu_foodlist">Food List</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name ="popular_categories">Phổ biến</string>
+</resources>
