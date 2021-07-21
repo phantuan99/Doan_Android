@@ -28,5 +28,4 @@ public class FoodListViewModel extends ViewModel  {
             return mutableLiveDataFoodList;
     }
 
-
 }

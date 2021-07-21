@@ -1,2 +1,30 @@
-package com.example.da_mientay.EventBus;public class FoodItemClick {
+package com.example.da_mientay.EventBus;
+
+import com.example.da_mientay.Model.Food;
+
+public class FoodItemClick {
+
+    private  boolean success;
+    private Food foodModel;
+
+    public FoodItemClick(boolean success, Food foodModel) {
+        this.success = success;
+        this.foodModel = foodModel;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public Food getFoodModel() {
+        return foodModel;
+    }
+
+    public void setFoodModel(Food foodModel) {
+        this.foodModel = foodModel;
+    }
 }

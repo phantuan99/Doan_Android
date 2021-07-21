@@ -4,10 +4,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.da_mientay.Common.Common;
 import com.example.da_mientay.EventBus.CategoryClick;
+import com.example.da_mientay.EventBus.FoodItemClick;
 import com.example.da_mientay.Model.Category;
+import com.example.da_mientay.Model.Food;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,20 +30,25 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
 
+import butterknife.BindView;
+
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomeBinding binding;
-    private  NavController navController;
+    private NavController navController;
     private DrawerLayout drawer;
+
+    TextView txt_Name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.appBarHome.toolbar);
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,15 +64,21 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_menu, R.id.nav_slideshow,
-                R.id.nav_foodlist)
+                R.id.nav_foodlist,R.id.nav_fooddetail)
                 .setDrawerLayout(drawer)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        //Set ten
+        View headerView = navigationView.getHeaderView(0);
+        txt_Name = (TextView)headerView.findViewById(R.id.txtName);
+        txt_Name.setText(Common.currentUser.getName());
+
         //Custom view nav
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
+
     }
 
     @Override
@@ -75,7 +90,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
+         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
@@ -86,6 +101,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -93,15 +109,28 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
-    //
+
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public  void onCategorySelected(CategoryClick event)
     {
         if(event.isSuccess())
         {
             navController.navigate(R.id.nav_foodlist);
+          //  Toast.makeText(this,"Click "+event.getCategoryModel(),Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public  void onFoodItemClick(FoodItemClick event)
+    {
+        if(event.isSuccess())
+        {
+            navController.navigate(R.id.nav_fooddetail);
+
+        }
+    }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
@@ -115,8 +144,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 case R.id. nav_menu:
                 navController.navigate(R.id.nav_menu);
                 break;
-
         }
         return true;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.da_mientay.Common;
 import com.example.da_mientay.Model.Category;
+import com.example.da_mientay.Model.Food;
 import  com.example.da_mientay.Model.User;
 public class Common {
 
@@ -11,4 +12,5 @@ public class Common {
     public  static final int DEFAULT_COLUMN_COUNT =0;
     public static  User currentUser;
     public static Category categorySelected;
+    public static Food selectedFood;
 }

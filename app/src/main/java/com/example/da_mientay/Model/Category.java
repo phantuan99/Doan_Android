@@ -10,6 +10,12 @@ public class Category {
 
     }
 
+    public Category(String menu_id, String name, String image, List<Food> foods) {
+        this.menu_id = menu_id;
+        this.name = name;
+        this.image = image;
+        this.foods = foods;
+    }
 
     public String getMenu_id() {
         return menu_id;

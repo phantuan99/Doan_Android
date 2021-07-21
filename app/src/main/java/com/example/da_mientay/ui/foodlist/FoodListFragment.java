@@ -1,5 +1,6 @@
 package com.example.da_mientay.ui.foodlist;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -51,13 +52,11 @@ public class FoodListFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_food_list,container,false);
         unbinder = ButterKnife.bind(this,root);
-
         initView();
-
         foodListViewModel.getMutableLiveDataFoodList().observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
             @Override
-            public void onChanged(List<Food> foods) {
-                adapter = new FoodListApdater(getContext(),foods);
+            public void onChanged(List<Food> food) {
+                adapter = new FoodListApdater(getContext(),food);
                 rcv_food_list.setAdapter(adapter);
                 rcv_food_list.setLayoutAnimation(layoutAnimationController);
             }
@@ -68,6 +67,10 @@ public class FoodListFragment extends Fragment {
     }
 
     private void initView() {
+        //set actionBar
+
+
+
         rcv_food_list.setHasFixedSize(true);
         rcv_food_list.setLayoutManager(new LinearLayoutManager(getContext()));
 

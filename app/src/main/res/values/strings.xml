@@ -14,6 +14,7 @@
     <string name="menu_menu">Menu</string>
     <string name="menu_foodlist">Food List</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_fooddetail">Food Detail</string>
 
     <string name ="popular_categories">Phổ biến</string>
 </resources>
