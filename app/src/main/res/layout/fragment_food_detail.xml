@@ -37,16 +37,6 @@
         android:backgroundTint="@android:color/white"
         app:pressedTranslationZ="12dp"
         android:src="@drawable/ic_baseline_shopping_cart_24"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom|right|start"
-        android:backgroundTint="@android:color/white"
-        app:useCompatPadding="true"
-        android:src="@drawable/ic_baseline_shopping_cart_24"/>
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedSV"
         android:clipToPadding="false"
@@ -92,13 +82,15 @@
                                 <Button
                                     android:layout_height="wrap_content"
                                     android:layout_width="wrap_content"
+                                    android:id="@+id/btn_plus"
                                     android:text="+"
                                     android:textSize="20dp"
                                     />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="0"
+                                    android:id="@+id/txt_number"
+                                    android:text="1"
                                     android:textSize="30dp"
                                     android:layout_marginLeft="20dp"
                                     android:layout_marginRight="20dp"
@@ -107,6 +99,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_width="wrap_content"
                                     android:text="-"
+                                    android:id="@+id/btn_minus"
                                     android:textSize="20dp"
                                     />
 
@@ -124,21 +117,81 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <RatingBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/ratingBar"
-                        android:layout_marginTop="12dp"
-                        android:numStars="5"
-                        android:stepSize="0.5"
-                        android:isIndicator="true" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Chú thích"
+                        android:text="Mô tả"
+                        android:textStyle="bold"
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mô tả"
                         android:id="@+id/food_description"
                         android:textSize="20dp" />
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Size"
+                        android:textStyle="bold"
+                        android:textSize="25dp" />
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/rdo_group_size"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp">
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                           >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Phần ăn thêm"
+                                android:textStyle="bold"
+                                android:textSize="25dp" />
+                            <ImageView
+                                android:id="@+id/img_add_addOn"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/ic_baseline_control_point_24" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <com.google.android.material.chip.ChipGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/chipG_selected_addon">
+                            </com.google.android.material.chip.ChipGroup>
+                        </TableRow>
+                </TableLayout>
 
             </androidx.cardview.widget.CardView>
 

@@ -2,14 +2,14 @@ package com.example.da_mientay.Model;
 
 public class Size {
     private  String name;
-    private  Long price;
+    private  int price;
 
     Size()
     {
 
     }
 
-    public Size(String name, Long price) {
+    public Size(String name, int price) {
         this.name = name;
         this.price = price;
     }
@@ -22,11 +22,11 @@ public class Size {
         this.name = name;
     }
 
-    public Long getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }

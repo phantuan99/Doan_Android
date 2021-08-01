@@ -7,28 +7,44 @@
     android:orientation="vertical"
     android:background="@android:color/white"
     tools:context=".ui.home.HomeFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/popular_categories"
-            android:textSize="24dp" />
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:textSize="28dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_popular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/viewPager"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="30dp"
+        android:text="Bán chạy"
+        android:textSize="28dp"
+        android:textStyle="bold" />
+
     <com.asksira.loopingviewpager.LoopingViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
         app:autoScroll="true"
         app:isInfinite="true"
         app:scrollInterval="5000"
-        app:viewpagerAspectRatio="1.33"
-        android:layout_alignParentBottom="true"/>
+        app:viewpagerAspectRatio="1.33" />
 </RelativeLayout>

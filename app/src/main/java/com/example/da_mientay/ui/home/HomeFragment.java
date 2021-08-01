@@ -68,15 +68,12 @@ public class HomeFragment extends Fragment {
         layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_item_from_left);
         rcv_popular.setHasFixedSize(true);
         rcv_popular.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-
     }
-
     @Override
     public void onResume() {
         super.onResume();
         viewPager.resumeAutoScroll();
     }
-
     @Override
     public void onPause() {
         viewPager.pauseAutoScroll();

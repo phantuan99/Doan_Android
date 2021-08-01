@@ -6,14 +6,54 @@ public class Food {
 
     private  String name,image,id,description;
     private  int price;
-//    private  List<Addon> addon;
-//    private  List<Size> size;
+
+    private Size userSelected;
+    private  List<Addon> addon;
+    private  List<Size> size;
+    private  List<Addon> userSelectedAddon;
+
+
+
+
+
+    public List<Addon> getUserSelectedAddon() {
+        return userSelectedAddon;
+    }
+
+    public void setUserSelectedAddon(List<Addon> userSelectedAddon) {
+        this.userSelectedAddon = userSelectedAddon;
+    }
+
+    public List<Addon> getAddon() {
+        return addon;
+    }
+
+    public void setAddons(List<Addon> addon) {
+        this.addon = addon;
+    }
+
+    public Size getUserSelected() {
+        return userSelected;
+    }
+
+    public void setUserSelected(Size userSelected) {
+        this.userSelected = userSelected;
+    }
 
     private  Food()
     {
 
     }
 
+    public List<Size> getSize() {
+        return size;
+    }
+
+
+
+    public void setSize(List<Size> size) {
+        this.size = size;
+    }
 
     public String getName() {
         return name;
