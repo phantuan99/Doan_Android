@@ -10,10 +10,12 @@ import android.widget.TextView;
 import com.asksira.loopingviewpager.LoopingPagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.example.da_mientay.EventBus.BestSellerClick;
 import com.example.da_mientay.Model.BestSeller;
 import com.example.da_mientay.R;
 
 
+import org.greenrobot.eventbus.EventBus;
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -42,12 +44,17 @@ public class MyBestSellerAdapter extends LoopingPagerAdapter<BestSeller> {
         Glide.with(convertView).load(itemList.get(listPosition).getImage())
                 .into(img_bestseller);
         txtBestSeller.setText(itemList.get(listPosition).getName());
+
+        convertView.setOnClickListener(v -> {
+            EventBus.getDefault().postSticky(new BestSellerClick(itemList.get(listPosition)));
+        });
     }
 
 
     @Override
     protected View inflateView(int viewType, ViewGroup container, int listPosition) {
         return LayoutInflater.from(context).inflate(R.layout.layout_bestseller_item,container,false);
-
     }
+
+
 }

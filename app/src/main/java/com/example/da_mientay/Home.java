@@ -8,8 +8,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.da_mientay.Common.Common;
+import com.example.da_mientay.EventBus.BestSellerClick;
 import com.example.da_mientay.EventBus.CategoryClick;
 import com.example.da_mientay.EventBus.FoodItemClick;
+import com.example.da_mientay.EventBus.PopularCategoryClick;
 import com.example.da_mientay.Model.Category;
 import com.example.da_mientay.Model.Food;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,6 +26,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.da_mientay.databinding.ActivityHomeBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -130,6 +136,124 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
     }
 
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public  void onPopularItemCLick(PopularCategoryClick event)
+    {
+        if(event.getPopularCategory()!=null)
+        {
+            FirebaseDatabase.getInstance()
+                    .getReference("Category")
+                    .child(event.getPopularCategory().getMenu_id())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists())
+                            {
+                                Common.categorySelected = snapshot.getValue(Category.class);
+
+                                //Load food
+                                FirebaseDatabase.getInstance()
+                                        .getReference("Category")
+                                        .child(event.getPopularCategory().getMenu_id())
+                                        .child("foods")
+                                        .orderByChild("id")
+                                        .equalTo(event.getPopularCategory().getFood_id())
+                                        .limitToLast(1)
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if(snapshot.exists())
+                                                {
+                                                    for(DataSnapshot itemSnapShot:snapshot.getChildren())
+                                                    {
+                                                        Common.selectedFood = itemSnapShot.getValue(Food.class);
+                                                    }
+                                                    navController.navigate(R.id.nav_fooddetail);
+                                                }
+                                                else
+                                                {
+                                                    Toast.makeText(Home.this, "Item không tồn tại",Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(Home.this, ""+error.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+        }
+    }
+
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public  void onBestSellerClick(BestSellerClick event)
+    {
+        if(event.getBestSeller()!=null)
+        {
+            FirebaseDatabase.getInstance()
+                    .getReference("Category")
+                    .child(event.getBestSeller().getMenu_id())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists())
+                            {
+                                Common.categorySelected = snapshot.getValue(Category.class);
+
+                                //Load food
+                                FirebaseDatabase.getInstance()
+                                        .getReference("Category")
+                                        .child(event.getBestSeller().getMenu_id())
+                                        .child("foods")
+                                        .orderByChild("id")
+                                        .equalTo(event.getBestSeller().getFood_id())
+                                        .limitToLast(1)
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if(snapshot.exists())
+                                                {
+                                                    for(DataSnapshot itemSnapShot:snapshot.getChildren())
+                                                    {
+                                                        Common.selectedFood = itemSnapShot.getValue(Food.class);
+                                                    }
+                                                    navController.navigate(R.id.nav_fooddetail);
+                                                }
+                                                else
+                                                {
+                                                    Toast.makeText(Home.this, "Item không tồn tại",Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(Home.this, ""+error.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+        }
+    }
 
 
     @Override

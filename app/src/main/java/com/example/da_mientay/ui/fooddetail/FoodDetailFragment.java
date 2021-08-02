@@ -25,6 +25,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 //import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
@@ -33,6 +34,7 @@ import com.example.da_mientay.Model.Addon;
 import com.example.da_mientay.Model.Food;
 import com.example.da_mientay.Model.Size;
 import com.example.da_mientay.R;
+import com.example.da_mientay.Signin;
 import com.example.da_mientay.ui.foodlist.FoodListViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
@@ -76,6 +78,10 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
     ChipGroup chipG_selected_addon;
 
     int showPrice;
+
+    //N
+    int total =1;
+
 
     //View inflate
     ChipGroup chipGroup_addon;
@@ -131,10 +137,43 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         View root  =inflater.inflate(R.layout.fragment_food_detail,container,false);
         unbinder = ButterKnife.bind(this,root);
         init();
+        plusandminus();
         foodDetailViewModel.getMutableLiveDataFood().observe(getViewLifecycleOwner(),food -> {
             showInfo(food);
         });
         return root;
+    }
+
+    private void plusandminus() {
+        int temp;
+        btn_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(total >1) {
+                    total--;
+                    txt_number.setText(String.valueOf(total));
+                    updatePrice();
+                }
+                else
+                    Toast.makeText(getActivity(),"1 là nhỏ nhất",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        btn_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if(total<10) {
+                   total++;
+                   txt_number.setText(String.valueOf(total));
+                   updatePrice();
+               }else
+               {
+                   Toast.makeText(getActivity(),"10 là lớn nhất",Toast.LENGTH_SHORT).show();
+               }
+            }
+        });
+
     }
 
     private void init() {
